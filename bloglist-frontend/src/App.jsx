@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 import { Blog, BlogForm } from './components/Blog'
 import { LoginForm } from './components/Login'
-import { Notification, ErrorMessage } from './components/Messages'
+import { Notification, ShowError } from './components/Messages'
 import { Togglable } from './components/toggable'
 
 import blogService from './services/blogs'
@@ -103,7 +103,7 @@ const App = () => {
     <div>
       <h1>Blogs</h1>
       <Notification message={infoMessage} />
-      <ErrorMessage message={errorMessage} />
+      <ShowError message={errorMessage} />
       {userInfo === null ?
         
         <Togglable buttonLabel='login'>
@@ -127,6 +127,7 @@ const App = () => {
               blog={blog} 
               clickAddLike={() => addLike(blog)} 
               clickDeleteBlog={() => deleteBlog(blog)}
+              user={userInfo}
             />)}
         </div>
 

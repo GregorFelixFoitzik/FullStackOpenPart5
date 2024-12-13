@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Togglable } from './toggable'
 import PropTypes from 'prop-types'
 
-const Blog = ({ blog, clickAddLike, clickDeleteBlog }) => {
+const Blog = ({ blog, clickAddLike, clickDeleteBlog, user }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -12,7 +12,7 @@ const Blog = ({ blog, clickAddLike, clickDeleteBlog }) => {
   }
 
   return (
-    <div style={blogStyle} className='SingleBl'>
+    <div style={blogStyle} className='blog-post'>
       <div className='Default Blog View'>
         {blog.title} - {blog.author}
       </div>
@@ -23,10 +23,12 @@ const Blog = ({ blog, clickAddLike, clickDeleteBlog }) => {
           likes {blog.likes} <button onClick={clickAddLike}>like</button>
         </div>
         <div>{blog.user.name}</div>
-        <div>
-          <button onClick={clickDeleteBlog}>remove</button>
+        {user && user.name === blog.user.name && (
+            <div>
+              <button onClick={clickDeleteBlog}>remove</button>
+            </div>
+          )}      
         </div>
-      </div>
       </Togglable>
     </div>
   )
@@ -53,7 +55,7 @@ const BlogForm = ({ createBlog }) => {
   return (<div><br />
     <form onSubmit={onSubmit} className='createBlogForm'>
       <div><input 
-        id='blog-title'
+        data-testid='blog-title'
         type="text"
         value={title}
         name="title"
@@ -61,7 +63,7 @@ const BlogForm = ({ createBlog }) => {
         onChange={handleTitleChange}
       /></div>
       <div><input
-        id='blog-author'
+        data-testid='blog-author'
         type="text"
         value={author}
         name="author"
@@ -69,14 +71,14 @@ const BlogForm = ({ createBlog }) => {
         onChange={handleAuthorChange}
       /></div>
       <div><input
-        id='blog-url'
+        data-testid='blog-url'
         type="text"
         value={url}
         name="url"
         placeholder="URL"
         onChange={handleUrlChange}
       /></div>
-    <button id='submit-blog-form' type="submit">create</button>
+    <button type="submit">create</button>
     </form>  
   </div>
   )

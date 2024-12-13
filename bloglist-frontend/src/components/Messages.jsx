@@ -11,7 +11,7 @@ const Notification = ({ message  }) => {
   )
 }
 
-const ErrorMessage = ({ message  }) => {
+const ShowError = ({ message  }) => {
   if (message === null) {
     return null
   }
@@ -25,11 +25,11 @@ const ErrorMessage = ({ message  }) => {
 Notification.propTypes = {
   message: PropTypes.string
 }
-ErrorMessage.propTypes = {
+ShowError.propTypes = {
   message: PropTypes.string
 }
 
 export {
   Notification,
-  ErrorMessage
+  ShowError
 }
